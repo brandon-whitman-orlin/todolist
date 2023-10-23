@@ -419,7 +419,6 @@ main .listDisplay .currentList .listTitle {
 	transition: transform 0.3s ease-in-out, outline 0.3s ease-in-out, outline-offset 0.3s ease-in-out;
 	outline: 0px solid black;
 	outline-offset: -10px;
-	width: 100%;
 }
 
 main .listDisplay .currentList .listTitle:hover {
@@ -547,6 +546,11 @@ main .listDisplay #checkMarkClone {
 main .listDisplay #contentEditButtonClone {
 	display: none;
 }
+
+main .listDisplay #listItemClone {
+	display: none;
+}
+
 
 main .listDisplay .currentList .listItems .addNewButton {
 	position: relative;

@@ -16,6 +16,9 @@ document.addEventListener('DOMContentLoaded', function() {
 	// Set up contentEditable functionalty
 	var contentEditableElements = document.querySelectorAll("[contenteditable]");
 	contentEditableClickDetector(contentEditableElements);
+
+	// Save the content every 30 seconds
+	saveList();
 });
 
 function presetTheme(theme) {
@@ -92,10 +95,13 @@ function addnewClickDetector(addNew) {
 			document.addEventListener("click", clickOutsideListener);
 		});
 
+		const list = document.querySelector(".listItems");
+		const numberOfItems = list.childElementCount;
+
 		const paragraph = document.createElement("p");
 		paragraph.className = "listText";
 		paragraph.setAttribute("contenteditable", "false");
-		paragraph.textContent = "List Item Number 1";
+		paragraph.textContent = `Item ${numberOfItems}`;
 
 		button.appendChild(clonedSVG);
 		button2.appendChild(clonedSVG2);
@@ -103,8 +109,6 @@ function addnewClickDetector(addNew) {
 		listItem.appendChild(button);
 		listItem.appendChild(button2);
 		listItem.appendChild(paragraph);
-
-		const list = document.querySelector(".listItems");
 
 		const lastItem = list.lastElementChild;
 
@@ -133,4 +137,95 @@ function contentEditableClickDetector(contentEditableElements) {
 			});
 		}
 	});
+}
+
+function saveList() {
+	function saveStateToLocalStorage() {
+		const currentList = document.querySelector('.currentList');
+		const listItems = currentList.querySelectorAll('.listItem');
+
+		const listState = [];
+
+		listState.push({
+			name: currentList.querySelector(".listTitle").textContent
+		});
+
+		listItems.forEach((item) => {
+			const checkBox = item.querySelector('.checkBox');
+			const listText = item.querySelector('.listText');
+
+			if (checkBox && listText) {
+				listState.push({
+					checked: checkBox.getAttribute('data-status'),
+					text: listText.textContent
+				});
+			}
+		});
+
+		localStorage.setItem('todoList', JSON.stringify(listState));
+		console.log("List has been saved");
+	}
+
+	function loadStateFromLocalStorage() {
+		const currentList = document.querySelector('.currentList');
+		const listItemsContainer = currentList.querySelector('.listItems');
+
+		const todoListString = localStorage.getItem('todoList');
+
+		if (todoListString) {
+			const todoList = JSON.parse(todoListString);
+
+			currentList.querySelector(".listTitle").textContent = todoList[0].name;
+
+			const listItems = listItemsContainer.querySelectorAll('.listItem');
+			listItems.forEach(item => {
+				if (!item.classList.contains('addNewItem')) {
+					listItemsContainer.removeChild(item);
+				}
+			});
+
+			for (let i = 1; i < todoList.length; i++) {
+				const existingListItem = document.querySelector('#listItemClone');
+				const existingListItem2 = existingListItem.cloneNode(true);
+				existingListItem2.removeAttribute('id');
+
+				const checkBoxButton = existingListItem2.querySelector(".checkBox");
+				checkBoxButton.setAttribute("data-status", todoList[i].checked);
+				checkBoxButton.addEventListener("click", () => {
+					checkBoxButton.setAttribute("data-status", checkBoxButton.getAttribute("data-status") === "unchecked" ? "checked" : "unchecked");
+				});
+
+				const contentEditButton = existingListItem2.querySelector(".contentEditButton");
+				contentEditButton.addEventListener("click", (event) => {
+					event.stopPropagation();
+					const contentEditable = contentEditButton.parentElement.querySelector("p");
+					contentEditable.setAttribute("contenteditable", "true");
+					contentEditable.focus();
+
+					const clickOutsideListener = (event) => {
+						if (!contentEditable.contains(event.target)) {
+							contentEditable.setAttribute("contenteditable", "false");
+							document.removeEventListener("click", clickOutsideListener);
+						}
+					};
+
+					document.addEventListener("click", clickOutsideListener);
+				});
+
+				existingListItem2.querySelector(".listText").textContent = todoList[i].text;
+				const lastItem = listItemsContainer.lastElementChild;
+				listItemsContainer.insertBefore(existingListItem2, lastItem);
+			}
+
+			// console.log("List has been loaded");
+		}
+	}
+
+
+
+	setInterval(() => {
+		saveStateToLocalStorage();
+	}, 5000);
+
+	loadStateFromLocalStorage();
 }
