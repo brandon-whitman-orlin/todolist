@@ -1,0 +1,564 @@
+/* PRESETS */
+:root[data-theme="light"] {
+	--text: #000000;
+	--background: #f9f6f6;
+	--primary: #6f935c;
+	--secondary: #d6e3e5;
+	--accent: #815c93;
+	--selected: #9e0063;
+	--checkBoxHover: #777777;
+}
+
+:root[data-theme="dark"] {
+	--text: #ffffff;
+	--background: #090606;
+	--primary: #7fa36c;
+	--secondary: #1a2628;
+	--accent: #906ca3;
+	--selected: #9e0063;
+	--checkBoxHover: #777777;
+}
+
+
+* {
+	color: var(--text);
+	font-family: 'Arimo', sans-serif;
+	scroll-behavior: smooth;
+	scroll-padding-top: 7.5rem;
+	box-sizing: border-box;
+	transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
+
+html,
+body {
+	overflow: hidden;
+	margin: 0;
+	padding: 0;
+	background-color: var(--background);
+}
+
+::selection {
+	background-color: var(--accent);
+}
+
+button,
+a {
+	cursor: pointer;
+}
+
+/* HEADER */
+.betterHeader {
+	font-family: 'Inconsolata', sans-serif;
+}
+
+.betterHeader .headerSpaceholder {
+	height: 5rem;
+	width: 100%;
+	position: relative;
+}
+
+.betterHeader .realHeader {
+	background-color: var(--primary);
+	height: 5rem;
+	width: 100%;
+	position: fixed;
+	top: 0;
+	display: flex;
+	justify-content: right;
+	align-items: center;
+	flex-wrap: nowrap;
+	border-bottom: 2px solid var(--text);
+	z-index: 5;
+}
+
+.betterHeader .logoLink {
+	display: flex;
+	justify-content: left;
+	align-items: center;
+	margin-left: 1rem;
+	text-decoration: none;
+	left: 0;
+	padding: 0.05rem 0.5rem;
+	position: absolute;
+	z-index: 2;
+	border-radius: 10px;
+	outline: 0px solid black;
+	transition: transform 0.3s ease-in-out, outline 0.3s ease-in-out, outline-offset 0.3s ease-in-out;
+	outline-offset: -10px;
+
+	color: var(--text);
+}
+
+.betterHeader .logoLink svg {
+	position: relative;
+	height: 2rem;
+	width: 2rem;
+	margin-right: 0.25rem;
+	transition: fill 0.3s ease-in-out;
+	fill: var(--text);
+}
+
+.betterHeader .logoLink h2 {
+	position: relative;
+	color: var(--text);
+	white-space: nowrap;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: max(1.2rem, 3.15vw);
+	font-family: 'Inconsolata', sans-serif;
+	margin: 0;
+	margin-bottom: 0.125rem;
+}
+
+.betterHeader .logoLink:hover {
+	transform: scale(1.1);
+	filter: invert(19%) sepia(29%) saturate(5851%) hue-rotate(300deg) brightness(89%) contrast(126%);
+}
+
+.betterHeader .logoLink:focus-visible {
+	outline: 2px solid rgba(0, 0, 0, 1);
+	outline-offset: 5px;
+	transform: scale(1.1);
+	filter: invert(19%) sepia(29%) saturate(5851%) hue-rotate(300deg) brightness(89%) contrast(126%);
+}
+
+.betterHeader .navBar {
+	display: flex;
+	justify-content: right;
+	align-items: center;
+	margin: 0rem 1rem;
+	position: relative;
+	height: 100%;
+
+	background-color: var(--primary);
+}
+
+.betterHeader .navBar .distanceChecker {
+	position: relative;
+	height: 100%;
+	width: 2rem;
+	opacity: 0;
+}
+
+.betterHeader .navBar .spaceHolder {
+	position: relative;
+	display: flex;
+	justify-content: right;
+	align-items: center;
+}
+
+.betterHeader .navBar .spaceHolder .openNav {
+	position: absolute;
+	width: max(1.2rem, 3.5vw);
+	height: max(1.2rem, 3.5vw);
+	background-color: transparent;
+	border: none;
+	background-image: url(assets/openMenu.svg);
+	background-size: 80%;
+	background-repeat: no-repeat;
+	background-position: center;
+	cursor: pointer;
+	border-radius: 100%;
+	padding: 0rem;
+	outline: 0px solid black;
+	outline-offset: -10px;
+	transition: transform 0.3s ease-in-out, outline 0.3s ease-in-out, outline-offset 0.3s ease-in-out;
+}
+
+.betterHeader .navBar .spaceHolder .openNav:hover {
+	filter: invert(19%) sepia(29%) saturate(5851%) hue-rotate(300deg) brightness(89%) contrast(126%);
+	transform: scale(1.1);
+}
+
+.betterHeader .navBar .spaceHolder .openNav:focus-visible {
+	filter: invert(19%) sepia(29%) saturate(5851%) hue-rotate(300deg) brightness(89%) contrast(126%);
+	font-size: larger;
+	font-weight: bolder;
+	outline: 2px solid black;
+	outline-offset: 5px;
+}
+
+.betterHeader .navBar ul {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding-left: 0;
+	list-style: none;
+	height: 100%;
+	margin: 0;
+	position: relative;
+	background-color: var(--primary);
+	z-index: 3;
+}
+
+.betterHeader .navBar[data-expanded="true"] .spaceHolder .openNav {
+	visibility: hidden;
+}
+
+.betterHeader .navBar[data-expanded="false"] .spaceHolder .openNav {
+	visibility: visible;
+}
+
+.betterHeader .navBar[data-expanded="true"] ul {
+	position: relative;
+	opacity: 1 !important;
+}
+
+.betterHeader .navBar[data-expanded="false"] ul {
+	position: absolute;
+	top: 100%;
+}
+
+.betterHeader .navBar ul[data-open="true"] {
+	opacity: 1;
+	right: -1rem;
+	width: 100vw;
+	flex-wrap: wrap;
+}
+
+.betterHeader .navBar ul[data-open="false"] {
+	opacity: 0;
+}
+
+.betterHeader .navBar ul {
+	position: absolute;
+}
+
+.betterHeader .navBar ul li {
+	white-space: nowrap;
+	width: max-content;
+	padding: 0rem 0.5rem;
+}
+
+.betterHeader .navBar ul li a {
+	font-family: 'Inconsolata', sans-serif;
+	text-transform: uppercase;
+	text-decoration: none;
+	color: var(--text);
+	border-radius: 10px;
+	outline: 0px solid rgba(0, 0, 0, 0);
+	outline-offset: -10px;
+	transition: outline 0.3s ease-in-out, padding 0.3s ease-in-out, font-size 0.3s ease-in-out, font-weight 0.3s ease-in-out, outline-offset 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.betterHeader .navBar ul li a:hover {
+	color: var(--selected);
+	font-size: larger;
+	font-weight: bolder;
+}
+
+.betterHeader .navBar ul li a:focus-visible {
+	color: var(--selected);
+	font-size: larger;
+	font-weight: bolder;
+	outline: 2px solid var(--selected);
+	outline-offset: 0px;
+	padding: 0.5rem;
+}
+
+/* COLOR MODE */
+#colorMode {
+	position: fixed;
+	width: 1.5rem;
+	height: 1.5rem;
+	background-color: var(--secondary);
+	overflow: hidden;
+	border: 2px solid var(--text);
+	border-radius: 5px;
+	bottom: 1rem;
+	left: 1rem;
+	z-index: 2;
+	outline: 0px solid black;
+	transition: transform 0.3s ease-in-out, outline 0.3s ease-in-out, outline-offset 0.3s ease-in-out;
+	outline-offset: -10px;
+}
+
+#colorMode svg {
+	position: absolute;
+	width: 70%;
+	height: 70%;
+	left: 15%;
+	top: 15%;
+	fill: var(--text);
+	background-color: transparent;
+	transition: transform 0.3s ease-in-out;
+}
+
+:root[data-theme="light"] #colorMode #moonIcon {
+	transform: translateY(3rem);
+}
+
+:root[data-theme="dark"] #colorMode #sunIcon {
+	transform: translateY(3rem);
+}
+
+#colorMode:hover svg,
+#colorMode:focus-visible svg {
+	fill: var(--selected);
+}
+
+#colorMode:focus-visible {
+	outline: 3px solid var(--selected);
+	outline-offset: 3px;
+}
+
+/* CONTROL PANEL*/
+.controlPanel {
+	display: flex;
+	justify-content: right;
+	align-items: center;
+	position: relative;
+	margin-left: auto;
+	height: fit-content;
+	width: 100%;
+}
+
+.controlPanel .panelControls {
+	background-color: var(--secondary);
+	list-style: none;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 1rem;
+	position: absolute;
+	top: 0;
+	margin: 0;
+	z-index: 2;
+	border-bottom-left-radius: 25px;
+	border-left: 2px solid var(--text);
+	border-bottom: 2px solid var(--text);
+}
+
+.controlPanel .panelControls .panelDivider {
+	background-color: var(--text);
+	width: 0.05rem;
+	height: 1.5rem;
+	position: relative;
+}
+
+.controlPanel .panelControls button {
+	background-color: transparent;
+	border: transparent;
+	position: relative;
+	cursor: pointer;
+	outline: 0px solid black;
+	transition: transform 0.3s ease-in-out, outline 0.3s ease-in-out, outline-offset 0.3s ease-in-out;
+	outline-offset: -10px;
+	border-radius: 10px;
+}
+
+.controlPanel .panelControls button:hover {
+	color: var(--selected);
+	font-weight: bolder;
+}
+
+.controlPanel .panelControls button:focus-visible {
+	color: var(--selected);
+	font-weight: bolder;
+	outline: 2px solid var(--selected);
+	outline-offset: 0px;
+}
+
+/* MAIN */
+main {
+	position: relative;
+	background-color: transparent;
+	width: 100%;
+	height: calc(100vh - 5rem);
+	padding-bottom: 1rem;
+	padding-inline: 2rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+main .listDisplay {
+	position: absolute;
+	width: 80%;
+	height: 80%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+main .listDisplay .currentList {
+	position: absolute;
+	background-color: var(--secondary);
+	width: 100%;
+	height: fit-content;
+	max-width: 100%;
+	max-height: 100%;
+    overflow-y: auto;
+	border: 2px solid var(--text);
+	border-radius: 25px;
+}
+
+main .listDisplay .currentList .listTitleSection {
+	position: relative;
+	display: flex;
+	justify-content: left;
+	align-items: center;
+	margin: 0;
+	width: 100%;
+	padding: 1rem;
+	border-bottom: 2px solid var(--text);
+}
+
+main .listDisplay .currentList .listTitle {
+	position: relative;
+	display: flex;
+	justify-content: left;
+	align-items: center;
+	margin: 0;
+	padding: 0;
+	width: fit-content;
+	border-radius: 5px;
+	box-sizing: border-box;
+	transition: transform 0.3s ease-in-out, outline 0.3s ease-in-out, outline-offset 0.3s ease-in-out;
+	outline: 0px solid black;
+	outline-offset: -10px;
+}
+
+main .listDisplay .currentList .listTitle:hover {
+	cursor: text;
+}
+
+main .listDisplay .currentList .listTitle:focus-visible {
+	outline: 3px solid var(--selected);
+	outline-offset: 2px;
+}
+
+main .listDisplay .currentList .listItems {
+	position: relative;
+	padding: 1rem;
+	display: flex;
+	justify-content: left;
+	align-items: start;
+	flex-direction: column;
+}
+
+main .listDisplay .currentList .listItems .listItem {
+	position: relative;
+	padding: 1rem;
+	display: flex;
+	justify-content: left;
+	align-items: start;
+	flex-direction: row;
+}
+
+main .listDisplay .currentList .listItems .checkBox {
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	margin: 0;
+	padding: 0;
+	width: 1.5rem;
+	height: 1.5rem;
+	background-color: var(--background);
+	border: 2px solid var(--text);
+	border-radius: 5px;
+	box-sizing: border-box;
+	transition: transform 0.3s ease-in-out, outline 0.3s ease-in-out, outline-offset 0.3s ease-in-out;
+	outline: 0px solid black;
+	outline-offset: -10px;
+}
+
+main .listDisplay .currentList .listItems .checkBox svg {
+	fill: var(--text);
+	height: 80%;
+    width: 80%;
+	transition: fill 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+main .listDisplay .currentList .listItems .checkBox[data-status="unchecked"] svg {
+	transform: scale(0);
+}
+
+main .listDisplay .currentList .listItems .checkBox[data-status="checked"] svg {
+	transform: scale(1);
+}
+
+main .listDisplay .currentList .listItems .checkBox:hover {
+	background-color: var(--checkBoxHover);
+}
+
+main .listDisplay .currentList .listItems .checkBox:focus-visible {
+	background-color: var(--checkBoxHover);
+	outline: 3px solid var(--selected);
+	outline-offset: 2px;
+}
+
+main .listDisplay #checkMarkClone {
+    display: none;
+}
+
+main .listDisplay .currentList .listItems .addNewButton {
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	margin: 0;
+	padding: 0;
+	width: 1.5rem;
+	height: 1.5rem;
+	background-color: transparent;
+	border: none;
+	border-radius: 5px;
+	box-sizing: border-box;
+	transition: transform 0.3s ease-in-out, outline 0.3s ease-in-out, outline-offset 0.3s ease-in-out;
+	outline: 0px solid black;
+	outline-offset: -10px;
+}
+
+main .listDisplay .currentList .listItems .addNewButton svg {
+	fill: var(--text);
+	height: 80%;
+    width: 80%;
+	transition: fill 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+
+main .listDisplay .currentList .listItems .addNewButton:hover svg {
+	fill: var(--selected);
+	transform: scale(1.1);
+}
+
+main .listDisplay .currentList .listItems .addNewButton:focus-visible {
+	outline: 3px solid var(--selected);
+	outline-offset: 2px;
+}
+
+main .listDisplay .currentList .listItems .addNewButton:focus-visible svg {
+	fill: var(--selected);
+	transform: scale(1.1);
+}
+
+main .listDisplay .currentList .listItems .listText {
+	position: relative;
+	padding: 1rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: row;
+	margin: 0;
+	margin-left: 1rem;
+	padding: 0;
+	height: 1.5rem;
+	border-radius: 5px;
+	box-sizing: border-box;
+	transition: transform 0.3s ease-in-out, outline 0.3s ease-in-out, outline-offset 0.3s ease-in-out;
+	outline: 0px solid black;
+}
+
+main .listDisplay .currentList .listItems .listText:hover {
+	cursor: text;
+}
+
+main .listDisplay .currentList .listItems .listText:focus-visible {
+	outline: 3px solid var(--selected);
+	outline-offset: 2px;
+}
