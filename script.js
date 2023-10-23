@@ -12,6 +12,10 @@ document.addEventListener('DOMContentLoaded', function() {
 	// Set up addNew functionalty
 	var addNew = document.querySelector(".addNewButton");
 	addnewClickDetector(addNew);
+
+	// Set up contentEditable functionalty
+	var contentEditableElements = document.querySelectorAll("[contenteditable]");
+	contentEditableClickDetector(contentEditableElements);
 });
 
 function presetTheme(theme) {
@@ -45,39 +49,88 @@ function checkboxClickDetector(checkboxes) {
 }
 
 function addnewClickDetector(addNew) {
-    addNew.addEventListener("click", function() {
-        const listItem = document.createElement("li");
-        listItem.className = "listItem";
+	addNew.addEventListener("click", function() {
+		const listItem = document.createElement("li");
+		listItem.className = "listItem";
 
-        const button = document.createElement("button");
-        button.className = "checkBox";
-        button.setAttribute("data-status", "unchecked");
+		const button = document.createElement("button");
+		button.className = "checkBox";
+		button.setAttribute("data-status", "unchecked");
 
-        const existingSVG = document.querySelector('#checkMarkClone');
-        const clonedSVG = existingSVG.cloneNode(true);
-        clonedSVG.removeAttribute('id');
+		const existingSVG = document.querySelector('#checkMarkClone');
+		const clonedSVG = existingSVG.cloneNode(true);
+		clonedSVG.removeAttribute('id');
 
-        button.addEventListener("click", function() {
-            if (button.getAttribute("data-status") === "unchecked") {
+		button.addEventListener("click", function() {
+			if (button.getAttribute("data-status") === "unchecked") {
 				button.setAttribute("data-status", "checked");
 			} else {
 				button.setAttribute("data-status", "unchecked");
 			}
-        });
+		});
 
-        const paragraph = document.createElement("p");
-        paragraph.className = "listText";
-        paragraph.setAttribute("contenteditable", "false");
-        paragraph.textContent = "List Item Number 1";
+		const button2 = document.createElement("button");
+		button2.className = "contentEditButton";
 
-        button.appendChild(clonedSVG);
-        listItem.appendChild(button);
-        listItem.appendChild(paragraph);
+		const existingSVG2 = document.querySelector('#contentEditButtonClone');
+		const clonedSVG2 = existingSVG2.cloneNode(true);
+		clonedSVG2.removeAttribute('id');
 
-        const list = document.querySelector(".listItems");
+		button2.addEventListener("click", function(event) {
+			event.stopPropagation();
+			contentEditable = button.parentElement.querySelector("p");
+			contentEditable.setAttribute("contenteditable", "true");
+			contentEditable.focus();
 
-        const lastItem = list.lastElementChild;
+			const clickOutsideListener = function(event) {
+				if (!contentEditable.contains(event.target)) {
+					contentEditable.setAttribute("contenteditable", "false");
+					document.removeEventListener("click", clickOutsideListener);
+				}
+			};
 
-        list.insertBefore(listItem, lastItem);
-    });
+			document.addEventListener("click", clickOutsideListener);
+		});
+
+		const paragraph = document.createElement("p");
+		paragraph.className = "listText";
+		paragraph.setAttribute("contenteditable", "false");
+		paragraph.textContent = "List Item Number 1";
+
+		button.appendChild(clonedSVG);
+		button2.appendChild(clonedSVG2);
+
+		listItem.appendChild(button);
+		listItem.appendChild(button2);
+		listItem.appendChild(paragraph);
+
+		const list = document.querySelector(".listItems");
+
+		const lastItem = list.lastElementChild;
+
+		list.insertBefore(listItem, lastItem);
+	});
+}
+
+function contentEditableClickDetector(contentEditableElements) {
+	contentEditableElements.forEach(function(contentEditable) {
+		const contentEditButton = contentEditable.parentElement.querySelector(".contentEditButton");
+		if (contentEditButton) {
+			contentEditButton.addEventListener("click", function(event) {
+				event.stopPropagation();
+
+				contentEditable.setAttribute("contenteditable", "true");
+				contentEditable.focus();
+
+				const clickOutsideListener = function(event) {
+					if (!contentEditable.contains(event.target)) {
+						contentEditable.setAttribute("contenteditable", "false");
+						document.removeEventListener("click", clickOutsideListener);
+					}
+				};
+
+				document.addEventListener("click", clickOutsideListener);
+			});
+		}
+	});
 }

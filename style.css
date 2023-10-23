@@ -387,15 +387,16 @@ main .listDisplay .currentList {
 	background-color: var(--secondary);
 	width: 100%;
 	height: fit-content;
-	max-width: 100%;
 	max-height: 100%;
-    overflow-y: auto;
+	overflow: hidden;
 	border: 2px solid var(--text);
 	border-radius: 25px;
+	top: 1.8rem
 }
 
 main .listDisplay .currentList .listTitleSection {
-	position: relative;
+	position: sticky;
+	top: 0;
 	display: flex;
 	justify-content: left;
 	align-items: center;
@@ -418,10 +419,11 @@ main .listDisplay .currentList .listTitle {
 	transition: transform 0.3s ease-in-out, outline 0.3s ease-in-out, outline-offset 0.3s ease-in-out;
 	outline: 0px solid black;
 	outline-offset: -10px;
+	width: 100%;
 }
 
 main .listDisplay .currentList .listTitle:hover {
-	cursor: text;
+	cursor: default;
 }
 
 main .listDisplay .currentList .listTitle:focus-visible {
@@ -436,6 +438,9 @@ main .listDisplay .currentList .listItems {
 	justify-content: left;
 	align-items: start;
 	flex-direction: column;
+	width: 100%;
+	overflow-y: auto;
+	height: calc(50vh + 1rem);
 }
 
 main .listDisplay .currentList .listItems .listItem {
@@ -445,6 +450,7 @@ main .listDisplay .currentList .listItems .listItem {
 	justify-content: left;
 	align-items: start;
 	flex-direction: row;
+	width: 100%;
 }
 
 main .listDisplay .currentList .listItems .checkBox {
@@ -469,7 +475,7 @@ main .listDisplay .currentList .listItems .checkBox {
 main .listDisplay .currentList .listItems .checkBox svg {
 	fill: var(--text);
 	height: 80%;
-    width: 80%;
+	width: 80%;
 	transition: fill 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
 
@@ -491,8 +497,55 @@ main .listDisplay .currentList .listItems .checkBox:focus-visible {
 	outline-offset: 2px;
 }
 
+main .listDisplay .currentList .contentEditButton {
+	position: absolute;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	margin: 0;
+	padding: 0;
+	right: 2rem;
+	width: 1.5rem;
+	height: 1.5rem;
+	background-color: transparent;
+	border: none;
+	border-radius: 5px;
+	box-sizing: border-box;
+	transition: transform 0.3s ease-in-out, outline 0.3s ease-in-out, outline-offset 0.3s ease-in-out;
+	outline: 0px solid black;
+	outline-offset: -10px;
+}
+
+main .listDisplay .currentList .contentEditButton svg {
+	fill: var(--text);
+	height: 70%;
+	width: 70%;
+	transition: fill 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+
+main .listDisplay .currentList .contentEditButton:hover svg {
+	fill: var(--selected);
+	transform: scale(1.1);
+}
+
+main .listDisplay .currentList .contentEditButton:focus-visible {
+	outline: 3px solid var(--selected);
+	outline-offset: 2px;
+}
+
+main .listDisplay .currentList .contentEditButton:focus-visible svg {
+	fill: var(--selected);
+	transform: scale(1.1);
+}
+
 main .listDisplay #checkMarkClone {
-    display: none;
+	display: none;
+}
+
+main .listDisplay #contentEditButtonClone {
+	display: none;
 }
 
 main .listDisplay .currentList .listItems .addNewButton {
@@ -517,7 +570,7 @@ main .listDisplay .currentList .listItems .addNewButton {
 main .listDisplay .currentList .listItems .addNewButton svg {
 	fill: var(--text);
 	height: 80%;
-    width: 80%;
+	width: 80%;
 	transition: fill 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
 
@@ -555,7 +608,7 @@ main .listDisplay .currentList .listItems .listText {
 }
 
 main .listDisplay .currentList .listItems .listText:hover {
-	cursor: text;
+	cursor: default;
 }
 
 main .listDisplay .currentList .listItems .listText:focus-visible {
