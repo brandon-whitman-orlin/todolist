@@ -26,7 +26,17 @@ function headerHandler(header) {
     function toggleMenu() {
         const isOpen = ul.getAttribute("data-open") === "true";
         ul.setAttribute("data-open", isOpen ? "false" : "true");
-        openNav.style.backgroundImage = `url(assets/${isOpen ? "openMenu" : "closeMenu"}.svg)`;
+    
+        const hamburger = openNav.querySelector(".hamburger");
+        const close = openNav.querySelector(".close");
+    
+        if (isOpen) {
+            hamburger.style.opacity = 1;
+            close.style.opacity = 0;
+        } else {
+            hamburger.style.opacity = 0;
+            close.style.opacity = 1;
+        }
     }
 
     function hideMenu(nav) {

@@ -154,29 +154,46 @@ a {
 	height: max(1.2rem, 3.5vw);
 	background-color: transparent;
 	border: none;
-	background-image: url(assets/openMenu.svg);
-	background-size: 80%;
-	background-repeat: no-repeat;
-	background-position: center;
 	cursor: pointer;
 	border-radius: 100%;
-	padding: 0rem;
 	outline: 0px solid black;
 	outline-offset: -10px;
 	transition: transform 0.3s ease-in-out, outline 0.3s ease-in-out, outline-offset 0.3s ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.25rem;
 }
 
-.betterHeader .navBar .spaceHolder .openNav:hover {
-	filter: invert(19%) sepia(29%) saturate(5851%) hue-rotate(300deg) brightness(89%) contrast(126%);
+.betterHeader .navBar .spaceHolder .openNav svg {
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	transition: fill 0.3s ease-in-out;
+	fill: var(--text);
+    outline: 0px solid black;
+	outline-offset: -10px;
+    border-radius: 100%;
+    transition: transform 0.3s ease-in-out, outline 0.3s ease-in-out, outline-offset 0.3s ease-in-out, fill 0.3s ease-in-out;
+}
+
+.betterHeader .navBar .spaceHolder .openNav .hamburger {
+    opacity: 1;
+}
+
+.betterHeader .navBar .spaceHolder .openNav .close {
+    opacity: 0;
+}
+
+.betterHeader .navBar .spaceHolder .openNav:hover svg {
+    fill: var(--selected);
 	transform: scale(1.1);
 }
 
-.betterHeader .navBar .spaceHolder .openNav:focus-visible {
-	filter: invert(19%) sepia(29%) saturate(5851%) hue-rotate(300deg) brightness(89%) contrast(126%);
-	font-size: larger;
-	font-weight: bolder;
-	outline: 2px solid black;
-	outline-offset: 5px;
+.betterHeader .navBar .spaceHolder .openNav:focus-visible svg {
+    fill: var(--selected);
+	outline: 2px solid var(--selected);
+	outline-offset: 4px;
 }
 
 .betterHeader .navBar ul {
@@ -208,6 +225,10 @@ a {
 .betterHeader .navBar[data-expanded="false"] ul {
 	position: absolute;
 	top: 100%;
+}
+
+.betterHeader .navBar[data-expanded="false"] ul[data-open="false"] {
+    display: none;
 }
 
 .betterHeader .navBar ul[data-open="true"] {
@@ -419,6 +440,7 @@ main .listDisplay .currentList .listTitle {
 	transition: transform 0.3s ease-in-out, outline 0.3s ease-in-out, outline-offset 0.3s ease-in-out;
 	outline: 0px solid black;
 	outline-offset: -10px;
+    max-width: 70%;
 }
 
 main .listDisplay .currentList .listTitle:hover {
@@ -673,6 +695,8 @@ main .listDisplay .currentList .listItems .listText {
 	box-sizing: border-box;
 	transition: transform 0.3s ease-in-out, outline 0.3s ease-in-out, outline-offset 0.3s ease-in-out;
 	outline: 0px solid black;
+    width: fit-content;
+    max-width: 45%;
 }
 
 main .listDisplay .currentList .listItems .listText:hover {
@@ -682,4 +706,56 @@ main .listDisplay .currentList .listItems .listText:hover {
 main .listDisplay .currentList .listItems .listText:focus-visible {
 	outline: 3px solid var(--selected);
 	outline-offset: 2px;
+}
+
+.textContent {
+	max-width: 90%;
+    background-color: var(--primary);
+    padding: 2rem;
+    border-radius: 25px;
+    border: 3px solid var(--text);
+    width: fit-content;
+}
+
+.textContent h2 {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: var(--secondary);
+	font-size: max(4vmin, 1.25rem);
+	padding: 0.5rem;
+	border-radius: 15px;
+	width: fit-content;
+	margin: 1rem auto;
+	border: 2px solid var(--text);
+	text-align: center;
+}
+
+.textContent a {
+	text-decoration: none;
+	color: var(--accent);
+	font-weight: bold;
+    box-sizing: border-box;
+	transition: transform 0.3s ease-in-out, outline 0.3s ease-in-out, outline-offset 0.3s ease-in-out, color 0.3s ease-in-out;
+	outline: 0px solid black;
+    border-radius: 5px;
+}
+
+.textContent a:hover {
+	color: var(--selected);
+}
+
+.textContent a:focus-visible {
+    color: var(--selected);
+	outline: 3px solid var(--selected);
+	outline-offset: 2px;
+}
+
+.textContent h1 {
+	position: relative;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: max(5vmin, 1.5rem);
 }
