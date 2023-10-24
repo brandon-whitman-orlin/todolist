@@ -12,7 +12,7 @@
 :root[data-theme="dark"] {
 	--text: #ffffff;
 	--background: #090606;
-	--primary: #7fa36c;
+	--primary: #222b1d;
 	--secondary: #1a2628;
 	--accent: #906ca3;
 	--selected: #9e0063;
@@ -504,7 +504,6 @@ main .listDisplay .currentList .contentEditButton {
 	flex-direction: column;
 	margin: 0;
 	padding: 0;
-	right: 2rem;
 	width: 1.5rem;
 	height: 1.5rem;
 	background-color: transparent;
@@ -515,6 +514,16 @@ main .listDisplay .currentList .contentEditButton {
 	outline: 0px solid black;
 	outline-offset: -10px;
 }
+
+main .listDisplay .listTitleSection .contentEditButton {
+    right: 3rem;
+
+}
+
+main .listDisplay .currentList .listItem .contentEditButton {
+	right: 2rem;
+}
+
 
 main .listDisplay .currentList .contentEditButton svg {
 	fill: var(--text);
@@ -539,11 +548,66 @@ main .listDisplay .currentList .contentEditButton:focus-visible svg {
 	transform: scale(1.1);
 }
 
+main .listDisplay .currentList .deleteElement {
+	position: absolute;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	margin: 0;
+	padding: 0;
+	width: 1.5rem;
+	height: 1.5rem;
+	background-color: transparent;
+	border: none;
+	border-radius: 5px;
+	box-sizing: border-box;
+	transition: transform 0.3s ease-in-out, outline 0.3s ease-in-out, outline-offset 0.3s ease-in-out;
+	outline: 0px solid black;
+	outline-offset: -10px;
+}
+
+main .listDisplay .listTitleSection .deleteElement {
+    right: 1rem;
+
+}
+
+main .listDisplay .currentList .listItem .deleteElement {
+	right: 0rem;
+}
+
+main .listDisplay .currentList .deleteElement svg {
+	fill: var(--text);
+	height: 70%;
+	width: 70%;
+	transition: fill 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+
+main .listDisplay .currentList .deleteElement:hover svg {
+	fill: var(--selected);
+	transform: scale(1.1);
+}
+
+main .listDisplay .currentList .deleteElement:focus-visible {
+	outline: 3px solid var(--selected);
+	outline-offset: 2px;
+}
+
+main .listDisplay .currentList .deleteElement:focus-visible svg {
+	fill: var(--selected);
+	transform: scale(1.1);
+}
+
 main .listDisplay #checkMarkClone {
 	display: none;
 }
 
 main .listDisplay #contentEditButtonClone {
+	display: none;
+}
+
+main .listDisplay #deleteElementClone {
 	display: none;
 }
 

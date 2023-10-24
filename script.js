@@ -17,6 +17,10 @@ document.addEventListener('DOMContentLoaded', function() {
 	var contentEditableElements = document.querySelectorAll("[contenteditable]");
 	contentEditableClickDetector(contentEditableElements);
 
+    // Set up deleteItem functionalty
+	var deleteElements = document.querySelectorAll(".deleteElement");
+	deleteElementClickDetector(deleteElements);
+
 	// Save the content every 30 seconds
 	saveList();
 });
@@ -47,6 +51,17 @@ function checkboxClickDetector(checkboxes) {
 			} else {
 				checkbox.setAttribute("data-status", "unchecked");
 			}
+		});
+	});
+}
+
+function deleteElementClickDetector(deleteElements) {
+	deleteElements.forEach(function(deleteElement) {
+		deleteElement.addEventListener("click", function() {
+            const numElements = (deleteElement.parentElement.parentElement.getElementsByTagName("li").length)-1;
+            if (numElements > 1) {
+                deleteElement.parentElement.parentElement.removeChild(this.parentElement);
+            }
 		});
 	});
 }
@@ -95,6 +110,20 @@ function addnewClickDetector(addNew) {
 			document.addEventListener("click", clickOutsideListener);
 		});
 
+        const button3 = document.createElement("button");
+		button3.className = "deleteElement";
+
+		const existingSVG3 = document.querySelector('#deleteElementClone');
+		const clonedSVG3 = existingSVG3.cloneNode(true);
+		clonedSVG3.removeAttribute('id');
+
+		button3.addEventListener("click", function() {
+            const numElements = (button3.parentElement.parentElement.getElementsByTagName("li").length)-1;
+            if (numElements > 1) {
+                button3.parentElement.parentElement.removeChild(this.parentElement);
+            }
+		});
+
 		const list = document.querySelector(".listItems");
 		const numberOfItems = list.childElementCount;
 
@@ -105,9 +134,12 @@ function addnewClickDetector(addNew) {
 
 		button.appendChild(clonedSVG);
 		button2.appendChild(clonedSVG2);
+        button3.appendChild(clonedSVG3);
 
 		listItem.appendChild(button);
 		listItem.appendChild(button2);
+        listItem.appendChild(button3);
+
 		listItem.appendChild(paragraph);
 
 		const lastItem = list.lastElementChild;
@@ -163,7 +195,8 @@ function saveList() {
 		});
 
 		localStorage.setItem('todoList', JSON.stringify(listState));
-		console.log("List has been saved");
+
+		// console.log("List has been saved");
 	}
 
 	function loadStateFromLocalStorage() {
@@ -212,6 +245,14 @@ function saveList() {
 					document.addEventListener("click", clickOutsideListener);
 				});
 
+                const deleteButton = existingListItem2.querySelector(".deleteElement");
+                deleteButton.addEventListener("click", function() {
+                    const numElements = (deleteButton.parentElement.parentElement.getElementsByTagName("li").length)-1;
+                    if (numElements > 1) {
+                        deleteButton.parentElement.parentElement.removeChild(this.parentElement);
+                    }
+                });
+
 				existingListItem2.querySelector(".listText").textContent = todoList[i].text;
 				const lastItem = listItemsContainer.lastElementChild;
 				listItemsContainer.insertBefore(existingListItem2, lastItem);
@@ -220,8 +261,6 @@ function saveList() {
 			// console.log("List has been loaded");
 		}
 	}
-
-
 
 	setInterval(() => {
 		saveStateToLocalStorage();
