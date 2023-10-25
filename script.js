@@ -5,6 +5,10 @@ document.addEventListener('DOMContentLoaded', function() {
 	var colorMode = document.getElementById("colorMode");
 	colorMode.addEventListener("click", changeTheme);
 
+    // Set up list list functionality
+    // var myLists = document.getElementById("myListsButton");
+    // myListsClickDetector(myLists);
+
 	// Set up checkbox functionalty
 	var checkboxes = document.querySelectorAll(".checkBox");
 	checkboxClickDetector(checkboxes);
@@ -42,6 +46,16 @@ function changeTheme() {
 		localStorage.setItem("colorMode", "dark");
 	}
 }
+
+// function myListsClickDetector(myLists) {
+//     myLists.addEventListener("click", function() {
+//         if (myLists.getAttribute("data-menuOpen") === "false") {
+//             myLists.setAttribute("data-menuOpen", "true");
+//         } else {
+//             myLists.setAttribute("data-menuOpen", "false");
+//         }
+//     });
+// }
 
 function checkboxClickDetector(checkboxes) {
 	checkboxes.forEach(function(checkbox) {
