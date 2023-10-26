@@ -112,9 +112,13 @@ function addnewClickDetector(addNew) {
 			event.stopPropagation();
 			contentEditable = button.parentElement.querySelector("p");
 			contentEditable.setAttribute("contenteditable", "true");
-			contentEditable.innerHTML = "";
 			contentEditable.focus();
-
+			var range = document.createRange();
+			var selection = window.getSelection();
+			range.selectNodeContents(contentEditable);
+			selection.removeAllRanges();
+			selection.addRange(range);
+			
 			const clickOutsideListener = function(event) {
 				if (!contentEditable.contains(event.target)) {
 					contentEditable.setAttribute("contenteditable", "false");
@@ -171,8 +175,12 @@ function contentEditableClickDetector(contentEditableElements) {
 				event.stopPropagation();
 
 				contentEditable.setAttribute("contenteditable", "true");
-				contentEditable.innerHTML = "";
 				contentEditable.focus();
+				var range = document.createRange();
+				var selection = window.getSelection();
+				range.selectNodeContents(contentEditable);
+				selection.removeAllRanges();
+				selection.addRange(range);
 
 				const clickOutsideListener = function(event) {
 					if (!contentEditable.contains(event.target)) {
@@ -249,8 +257,12 @@ function saveList() {
 					event.stopPropagation();
 					const contentEditable = contentEditButton.parentElement.querySelector("p");
 					contentEditable.setAttribute("contenteditable", "true");
-					contentEditable.innerHTML = "";
 					contentEditable.focus();
+					var range = document.createRange();
+					var selection = window.getSelection();
+					range.selectNodeContents(contentEditable);
+					selection.removeAllRanges();
+					selection.addRange(range);
 
 					const clickOutsideListener = (event) => {
 						if (!contentEditable.contains(event.target)) {
