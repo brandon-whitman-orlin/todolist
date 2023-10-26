@@ -477,6 +477,7 @@ main .listDisplay .currentList .listTitle {
 	outline: 0px solid black;
 	outline-offset: -10px;
     max-width: 70%;
+	margin-right: 2rem;
 }
 
 main .listDisplay .currentList .listTitle:hover {
@@ -555,7 +556,7 @@ main .listDisplay .currentList .listItems .checkBox:focus-visible {
 }
 
 main .listDisplay .currentList .contentEditButton {
-	position: absolute;
+	position: relative;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -573,14 +574,14 @@ main .listDisplay .currentList .contentEditButton {
 	outline-offset: -10px;
 }
 
-main .listDisplay .listTitleSection .contentEditButton {
+/* main .listDisplay .listTitleSection .contentEditButton {
     right: 3rem;
 
 }
 
 main .listDisplay .currentList .listItem .contentEditButton {
 	right: 2rem;
-}
+} */
 
 
 main .listDisplay .currentList .contentEditButton svg {
@@ -607,7 +608,7 @@ main .listDisplay .currentList .contentEditButton:focus-visible svg {
 }
 
 main .listDisplay .currentList .deleteElement {
-	position: absolute;
+	position: relative;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -625,14 +626,14 @@ main .listDisplay .currentList .deleteElement {
 	outline-offset: -10px;
 }
 
-main .listDisplay .listTitleSection .deleteElement {
+/* main .listDisplay .listTitleSection .deleteElement {
     right: 1rem;
 
 }
 
 main .listDisplay .currentList .listItem .deleteElement {
 	right: 0rem;
-}
+} */
 
 main .listDisplay .currentList .deleteElement svg {
 	fill: var(--text);
@@ -733,6 +734,7 @@ main .listDisplay .currentList .listItems .listText {
 	outline: 0px solid black;
     width: fit-content;
     max-width: 45%;
+	margin-right: 2rem;
 }
 
 main .listDisplay .currentList .listItems .listText:hover {

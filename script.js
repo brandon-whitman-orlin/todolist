@@ -112,6 +112,7 @@ function addnewClickDetector(addNew) {
 			event.stopPropagation();
 			contentEditable = button.parentElement.querySelector("p");
 			contentEditable.setAttribute("contenteditable", "true");
+			contentEditable.innerHTML = "";
 			contentEditable.focus();
 
 			const clickOutsideListener = function(event) {
@@ -170,6 +171,7 @@ function contentEditableClickDetector(contentEditableElements) {
 				event.stopPropagation();
 
 				contentEditable.setAttribute("contenteditable", "true");
+				contentEditable.innerHTML = "";
 				contentEditable.focus();
 
 				const clickOutsideListener = function(event) {
@@ -247,6 +249,7 @@ function saveList() {
 					event.stopPropagation();
 					const contentEditable = contentEditButton.parentElement.querySelector("p");
 					contentEditable.setAttribute("contenteditable", "true");
+					contentEditable.innerHTML = "";
 					contentEditable.focus();
 
 					const clickOutsideListener = (event) => {
